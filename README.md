@@ -1,5 +1,3 @@
-** Project done by Willianto Asalim on Feb - March 2021
-
 # Automatic_Review_Analyzer
 A classifier for sentiment analysis of product reviews using Python language
 
