@@ -2,6 +2,7 @@ from string import punctuation, digits
 import numpy as np
 import random
 
+
 # Part I
 
 
@@ -18,6 +19,7 @@ def get_order(n_samples):
 
     # Hinge Loss Pyton code below help
     # https://www.includehelp.com/python/function-for-hinge-loss-for-multiple-points.aspx
+
 
 def hinge_loss_single(feature_vector, label, theta, theta_0):
     """
@@ -274,6 +276,7 @@ def pegasos(feature_matrix, labels, T, L):
     return (theta, theta_0)
     raise NotImplementedError
 
+
 # Part II
 
 
@@ -339,43 +342,17 @@ def classifier_accuracy(
     Returns: A tuple in which the first element is the (scalar) accuracy of the
     trained classifier on the training data and the second element is the
     accuracy of the trained classifier on the validation data.
+
     """
     # Your code here
     theta, theta_0 = classifier(train_feature_matrix, train_labels, **kwargs)
+    train_preds = classify(train_feature_matrix, theta, theta_0)
+    val_preds = classify(val_feature_matrix, theta, theta_0)
+    trn_acc = accuracy(train_preds, train_labels)
+    val_acc = accuracy(val_preds, val_labels)
+    return trn_acc, val_acc
 
-    #if len(kwargs) == 2:
-    #    T = kwargs["T"]
-    #    L = kwargs["L"]
-    #else:
-
-
-    # accuracy function provided
-    # def accuracy(preds, targets):
-    #     """
-    #     Given length-N vectors containing predicted and target labels,
-    #     returns the percentage and number of correct predictions.
-    #     """
-    #     return (preds == targets).mean()
-
-
-    # Code from main.py
-    # pct_train_accuracy, pct_val_accuracy = \
-    #     p1.classifier_accuracy(p1.perceptron, train_bow_features, val_bow_features, train_labels, val_labels, T=T)
-    # print("{:35} {:.4f}".format("Training accuracy for perceptron:", pct_train_accuracy))
-    # print("{:35} {:.4f}".format("Validation accuracy for perceptron:", pct_val_accuracy))
-    #
-    # avg_pct_train_accuracy, avg_pct_val_accuracy = \
-    #     p1.classifier_accuracy(p1.average_perceptron, train_bow_features, val_bow_features, train_labels, val_labels,
-    #                            T=T)
-    # print("{:43} {:.4f}".format("Training accuracy for average perceptron:", avg_pct_train_accuracy))
-    # print("{:43} {:.4f}".format("Validation accuracy for average perceptron:", avg_pct_val_accuracy))
-    #
-    # avg_peg_train_accuracy, avg_peg_val_accuracy = \
-    #     p1.classifier_accuracy(p1.pegasos, train_bow_features, val_bow_features, train_labels, val_labels, T=T, L=L)
-    # print("{:50} {:.4f}".format("Training accuracy for Pegasos:", avg_peg_train_accuracy))
-    # print("{:50} {:.4f}".format("Validation accuracy for Pegasos:", avg_peg_val_accuracy))
-
-    #raise NotImplementedError
+    # raise NotImplementedError
 
 
 def extract_words(input_string):
@@ -399,7 +376,7 @@ def bag_of_words(texts):
     Feel free to change this code as guided by Problem 9
     """
     # Your code here
-    dictionary = {} # maps word to unique index
+    dictionary = {}  # maps word to unique index
     for text in texts:
         word_list = extract_words(text)
         for word in word_list:
