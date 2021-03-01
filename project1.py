@@ -375,12 +375,12 @@ def bag_of_words(texts):
 
     Feel free to change this code as guided by Problem 9
     """
-    # Your code here
-    dictionary = {}  # maps word to unique index
+    #Your code here
     with open('stopwords.txt') as f:
         stop_words = f.readlines()
     stop_words = [x.rstrip() for x in stop_words]
 
+    dictionary = {}  # maps word to unique index
     for text in texts:
         word_list = extract_words(text)
         word_list = [x for x in word_list if x not in stop_words]
@@ -391,7 +391,7 @@ def bag_of_words(texts):
     return dictionary
 
 
-def extract_bow_feature_vectors(reviews, dictionary, binarize=True):
+def extract_bow_feature_vectors(reviews, dictionary, binarize=False):
     """
     Inputs a list of string reviews
     Inputs the dictionary of words as given by bag_of_words
@@ -411,9 +411,9 @@ def extract_bow_feature_vectors(reviews, dictionary, binarize=True):
         for word in word_list:
             if word in dictionary:
                 if binarize:
-                    feature_matrix[i, dictionary[word]] = 1
-                else:
                     feature_matrix[i, dictionary[word]] += 1
+                else:
+                    feature_matrix[i, dictionary[word]] = 1
     return feature_matrix
 
 

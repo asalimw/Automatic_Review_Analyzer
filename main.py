@@ -131,4 +131,34 @@ test_bow_features = p1.extract_bow_feature_vectors(test_texts, dictionary)
 # print("Most Explanatory Word Features")
 # print(sorted_word_features[:10])
 
+#----------------------------------------------------------
+T = 25
+L = 0.01
+# Test 1 without stop words
+# print('len(dictionary) before:', len(dictionary))
+# train_final_features = p1.extract_bow_feature_vectors(train_texts, dictionary)
+# val_final_features = p1.extract_bow_feature_vectors(val_texts, dictionary)
+# test_final_features = p1.extract_bow_feature_vectors(test_texts, dictionary)
+#
 
+# peg_train_accuracy, peg_test_accuracy = \
+#     p1.classifier_accuracy(p1.pegasos, train_final_features,test_final_features,train_labels,test_labels,T=T, L=L)
+#
+# print('[normal features]: making prediction using PEGASOS, T =', T)
+# print("{:43} {:.4f}".format("Training accuracy for PEGASOS:", peg_train_accuracy))
+# print("{:43} {:.4f}".format("Testing accuracy for PEGASOS:", peg_test_accuracy))
+
+# Test 2 with stop words
+dictionary = p1.bag_of_words(train_texts)
+print('len(dictionary) after:', len(dictionary))
+train_final_features = p1.extract_bow_feature_vectors(train_texts, dictionary, binarize=False)
+val_final_features = p1.extract_bow_feature_vectors(val_texts, dictionary, binarize=False)
+test_final_features = p1.extract_bow_feature_vectors(test_texts, dictionary, binarize=False)
+
+
+peg_train_accuracy, peg_test_accuracy = \
+    p1.classifier_accuracy(p1.pegasos, train_final_features,test_final_features,train_labels,test_labels, T=T, L=L)
+
+print('[Stopword feataures]: making prediction using PEGASOS, T =', T)
+print("{:43} {:.4f}".format("Training accuracy for PEGASOS:", peg_train_accuracy))
+print("{:43} {:.4f}".format("Testing accuracy for PEGASOS:", peg_test_accuracy))
