@@ -130,3 +130,5 @@ test_bow_features = p1.extract_bow_feature_vectors(test_texts, dictionary)
 # sorted_word_features = utils.most_explanatory_word(best_theta, wordlist)
 # print("Most Explanatory Word Features")
 # print(sorted_word_features[:10])
+
+

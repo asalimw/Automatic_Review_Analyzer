@@ -391,7 +391,7 @@ def bag_of_words(texts):
     return dictionary
 
 
-def extract_bow_feature_vectors(reviews, dictionary):
+def extract_bow_feature_vectors(reviews, dictionary, binarize=True):
     """
     Inputs a list of string reviews
     Inputs the dictionary of words as given by bag_of_words
@@ -410,7 +410,10 @@ def extract_bow_feature_vectors(reviews, dictionary):
         word_list = extract_words(text)
         for word in word_list:
             if word in dictionary:
-                feature_matrix[i, dictionary[word]] = 1
+                if binarize:
+                    feature_matrix[i, dictionary[word]] = 1
+                else:
+                    feature_matrix[i, dictionary[word]] += 1
     return feature_matrix
 
 
