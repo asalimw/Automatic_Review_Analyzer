@@ -345,14 +345,14 @@ def classifier_accuracy(
 
     """
     # Your code here
-    theta, theta_0 = classifier(train_feature_matrix, train_labels, **kwargs)
-    train_preds = classify(train_feature_matrix, theta, theta_0)
-    val_preds = classify(val_feature_matrix, theta, theta_0)
-    trn_acc = accuracy(train_preds, train_labels)
-    val_acc = accuracy(val_preds, val_labels)
+    theta, theta_0 = classifier(train_feature_matrix, train_labels, **kwargs) #Inputs for classify function.
+    train_preds = classify(train_feature_matrix, theta, theta_0) #Train Prediction for accuracy function
+    val_preds = classify(val_feature_matrix, theta, theta_0) #Validation Prediction for accuracy function
+    trn_acc = accuracy(train_preds, train_labels) #Train Accuracy
+    val_acc = accuracy(val_preds, val_labels) #Validation Accuracy
     return trn_acc, val_acc
 
-    # raise NotImplementedError
+    raise NotImplementedError
 
 
 def extract_words(input_string):
@@ -377,11 +377,17 @@ def bag_of_words(texts):
     """
     # Your code here
     dictionary = {}  # maps word to unique index
+    with open('stopwords.txt') as f:
+        stop_words = f.readlines()
+    stop_words = [x.rstrip() for x in stop_words]
+
     for text in texts:
         word_list = extract_words(text)
+        word_list = [x for x in word_list if x not in stop_words]
         for word in word_list:
             if word not in dictionary:
                 dictionary[word] = len(dictionary)
+
     return dictionary
 
 

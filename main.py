@@ -122,11 +122,11 @@ test_bow_features = p1.extract_bow_feature_vectors(test_texts, dictionary)
 # accurate algorithm with the optimal choice of hyperparameters.
 #-------------------------------------------------------------------------------
 
-T = 25
-L = 0.01
-
-best_theta, best_theta_0 = p1.pegasos(train_bow_features,train_labels,T=T, L=L)
-wordlist   = [word for (idx, word) in sorted(zip(dictionary.values(), dictionary.keys()))]
-sorted_word_features = utils.most_explanatory_word(best_theta, wordlist)
-print("Most Explanatory Word Features")
-print(sorted_word_features[:10])
+# T = 25
+# L = 0.01
+#
+# best_theta, best_theta_0 = p1.pegasos(train_bow_features,train_labels,T=T, L=L)
+# wordlist   = [word for (idx, word) in sorted(zip(dictionary.values(), dictionary.keys()))]
+# sorted_word_features = utils.most_explanatory_word(best_theta, wordlist)
+# print("Most Explanatory Word Features")
+# print(sorted_word_features[:10])
